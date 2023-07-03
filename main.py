@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, flash, abort, request
+from flask import Flask, render_template, redirect, url_for, flash, abort, request, send_from_directory
 from flask_bootstrap import Bootstrap
 from flask_ckeditor import CKEditor
 from datetime import date
@@ -18,7 +18,7 @@ ckeditor = CKEditor(app)
 Bootstrap(app)
 
 ##CONNECT TO DB
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////Users/luammiller/Desktop/Code/liams_blog/blog.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
@@ -44,7 +44,6 @@ class User(UserMixin, db.Model):
     posts = db.relationship('BlogPost', back_populates='author')
     comments = db.relationship('Comment', back_populates='comment_author')
 
-
 class Comment(db.Model):
     __tablename__ = 'comments'
     id = db.Column(db.Integer, primary_key=True)
@@ -54,10 +53,9 @@ class Comment(db.Model):
     post_id = db.Column(db.Integer, db.ForeignKey('blog_posts.id'))
     text = db.Column(db.Text, nullable = False)
 
-
 with app.app_context():
-    db.create_all()
-
+        db.create_all()
+        
 #Configure flask login
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -74,6 +72,9 @@ def admin_required(func):
         return func(*args, **kwargs)
     return decorated_view
 
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(app.static_folder, 'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 @app.route('/', methods=['GET', 'POST'])
 def get_all_posts():
