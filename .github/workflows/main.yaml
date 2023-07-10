@@ -24,9 +24,10 @@ jobs:
       - name: Run tests
         run: python -m test_main
 
-      - name: Login to Heroku
-        run: heroku container:login --password=${{ secrets.HEROKU_API_KEY }}
-
+      - name: Login to Heroku Container registry
+        env: 
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: heroku container:login
 
       - name: Build and push Docker image
         run: heroku container:push web --app your-heroku-app-name
