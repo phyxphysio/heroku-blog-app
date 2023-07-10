@@ -22,7 +22,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Run tests
-        run: python -m unittest tests.test_main
+        run: python -m test_main
 
       - name: Login to Heroku
         run: heroku container:login
