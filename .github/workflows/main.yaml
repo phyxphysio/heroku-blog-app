@@ -30,7 +30,7 @@ jobs:
         run: heroku container:login
 
       - name: Build and push Docker image
-        run: heroku container:push web --app your-heroku-app-name
+        run: heroku container:push web --app liam-blog-app
 
       - name: Release Docker image
         run: heroku container:release web --app liam-blog-app
