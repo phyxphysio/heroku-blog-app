@@ -1,6 +1,6 @@
 import unittest
 from flask import Flask
-from application import app, db, User, BlogPost, Comment
+from main import app, db, User, BlogPost, Comment
 
 class FlaskAppTestCase(unittest.TestCase):
 

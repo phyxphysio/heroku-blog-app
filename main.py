@@ -11,6 +11,7 @@ from flask_gravatar import Gravatar
 from forms import RegisterForm, CreatePostForm, LoginForm, CommentForm
 from functools import wraps
 from flask_wtf import FlaskForm
+import gunicorn
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
