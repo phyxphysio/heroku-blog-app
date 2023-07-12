@@ -25,15 +25,3 @@ jobs:
         run: python -m test_main
 
 
-      
-      - name: Set up Heroku CLI
-        run: |
-          curl https://cli-assets.heroku.com/install.sh | sh
-          echo "${{ secrets.HEROKU_API_KEY }}" | heroku login --interactive
-
-      - name: Build and push Docker image
-        run: heroku container:push web --app liam-blog-app
-
-      - name: Release Docker image
-        run: heroku container:release web --app liam-blog-app
-
