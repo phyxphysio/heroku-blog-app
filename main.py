@@ -54,8 +54,8 @@ class Comment(db.Model):
     post_id = db.Column(db.Integer, db.ForeignKey('blog_posts.id'))
     text = db.Column(db.Text, nullable = False)
 
-with app.app_context():
-        db.create_all()
+# with app.app_context():
+#         db.create_all()
         
 #Configure flask login
 login_manager = LoginManager()
@@ -210,6 +210,6 @@ def delete_post(post_id):
     return redirect(url_for('get_all_posts'))
 
 
-if __name__ == "__main__":
-    app.run()
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=os.environ.get('PORT', 5000))
 
