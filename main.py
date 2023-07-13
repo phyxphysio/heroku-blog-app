@@ -73,10 +73,6 @@ def admin_required(func):
         return func(*args, **kwargs)
     return decorated_view
 
-@app.route('/favicon.ico', methods=['GET'])
-def favicon():
-    return send_from_directory(app.static_folder, 'favicon.ico', mimetype='image/vnd.microsoft.icon')
-
 @app.route('/', methods=['GET', 'POST'])
 def get_all_posts():
     posts = BlogPost.query.all()
