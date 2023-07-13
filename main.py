@@ -54,8 +54,8 @@ class Comment(db.Model):
     post_id = db.Column(db.Integer, db.ForeignKey('blog_posts.id'))
     text = db.Column(db.Text, nullable = False)
 
-# with app.app_context():
-#         db.create_all()
+with app.app_context():
+        db.create_all()
         
 #Configure flask login
 login_manager = LoginManager()
