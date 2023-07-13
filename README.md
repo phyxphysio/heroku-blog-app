@@ -1,0 +1,2 @@
+This a blog website made with Flask, Bootstrap, and SQLite. It is deployed to Heroku via GitHub, and employs GitHub Actions to run a test suite before deploymnet. 
+The app supports deifferent Users with login functionality, Posts, and Comments. The admin user can create, edit, and delte posts. All users can comment on posts.  
