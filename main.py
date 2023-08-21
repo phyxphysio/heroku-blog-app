@@ -1,20 +1,26 @@
-from flask import Flask, render_template, redirect, url_for, flash, abort, request, send_from_directory
+from datetime import date
+from functools import wraps
+
+import gunicorn
+from flask import (Flask, abort, flash, redirect, render_template, request,
+                   send_from_directory, url_for)
 from flask_bootstrap import Bootstrap
 from flask_ckeditor import CKEditor
-from datetime import date
-from werkzeug.security import generate_password_hash, check_password_hash
-from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy.orm import relationship
-from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
-from forms import CreatePostForm
 from flask_gravatar import Gravatar
-from forms import RegisterForm, CreatePostForm, LoginForm, CommentForm
-from functools import wraps
+from flask_login import (LoginManager, UserMixin, current_user, login_required,
+                         login_user, logout_user)
+from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
-import gunicorn
+from sqlalchemy.orm import relationship
+from werkzeug.security import check_password_hash, generate_password_hash
 
+from forms import CommentForm, CreatePostForm, LoginForm, RegisterForm
+
+from decouple import config
+
+SECRET_KEY = config('SECRET_KEY')
 app = Flask(__name__)
-app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
+app.config['SECRET_KEY'] = SECRET_KEY
 ckeditor = CKEditor(app)
 Bootstrap(app)
 
@@ -211,5 +217,5 @@ def delete_post(post_id):
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=os.environ.get('PORT', 5000))
+    app.run()
 
