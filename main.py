@@ -2,6 +2,7 @@ from datetime import date
 from functools import wraps
 
 import gunicorn
+from decouple import config
 from flask import (Flask, abort, flash, redirect, render_template, request,
                    send_from_directory, url_for)
 from flask_bootstrap import Bootstrap
@@ -15,8 +16,6 @@ from sqlalchemy.orm import relationship
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from forms import CommentForm, CreatePostForm, LoginForm, RegisterForm
-
-from decouple import config
 
 SECRET_KEY = config('SECRET_KEY')
 app = Flask(__name__)
